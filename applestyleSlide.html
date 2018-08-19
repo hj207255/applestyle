@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>苹果风格轮播</title>
+    <script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background-color: #f2f2f2;
+        }
+        .window{
+            width: 500px;
+            height: 375px;
+            overflow: hidden;
+        }
+        .images{
+            display: flex;
+            align-items: flex-start;
+            transition: all .5s;
+        }
+        .slidebar{
+            display: flex;
+            align-items: flex-start;
+        }
+        .slide{
+            width: 240px;
+            height: 45px;
+            margin: 0 auto;
+            position: relative;
+        }
+        .slide span{
+            display: inline-block;
+            height: 45px;
+            width: 60px;
+            line-height: 45px;
+            text-align: center;
+            vertical-align: top;
+            background: url("divider.png") no-repeat right;
+            cursor: pointer;
+        }
+        .slide span img{
+            padding-top: 15px;
+        }
+        .slideWindow{
+            width: 500px;
+            height: 422px;
+            border: 1px solid white;
+            box-shadow: 0 0 3px #AAAAAA;
+            margin: 70px auto;
+        }
+        .slide span.act, .slide span.act:hover{
+            background: url("active_bg.png") no-repeat ;
+        }
+        .slide span.act{
+            background: url("active_bg.png") no-repeat ;
+        }
+        span:hover{
+            background: url("pic_bg.png") repeat;
+        }
+        .kong{
+            width: 2px;
+            height: 45px;
+            background: url("divider.png") no-repeat right;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+<div class="slideWindow">
+    <div class="window">
+        <div class="images" id="images">
+            <img src="1.jpg" alt="">
+            <img src="2.jpg" alt="">
+            <img src="3.jpg" alt="">
+            <img src="4.jpg" alt="">
+        </div>
+    </div>
+    <div class="slide">
+        <em class="kong"></em>
+        <div class="slidebar">
+            <span>
+                <img src="q1.png" alt="" width="24px">
+            </span>
+            <span>
+                <img src="q2.png" alt="" width="24px">
+            </span>
+            <span>
+                <img src="q3.png" alt="" width="24px">
+            </span>
+            <span>
+                <img src="q4.png" alt="" width="24px">
+            </span>
+        </div>
+    </div>
+</div>
+
+    <script>
+        $('.slidebar>span:nth-child(1)').addClass('act');
+        let $buttons=$('.slidebar>span');
+        for (let i=0;i<$buttons.length;i++){
+            $buttons.eq(i).on('click',function (e) {
+                //获取当前点击按钮的索引值
+                let index=$(e.currentTarget).index();
+                let s=index*500;
+                $('#images').css({transform:"translateX(-"+s+"px)"});
+                $(e.currentTarget).addClass('act')
+                    .siblings('.act').removeClass('act');
+            })
+        }
+    </script>
+</body>
+</html>
